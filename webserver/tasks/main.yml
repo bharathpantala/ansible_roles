@@ -1,0 +1,15 @@
+- name: "Installing git=============>"
+  apt: pkg=git-core state=installed
+
+#- name: "copying websites to webserver"
+  copy: src=../files/about_us.html dest=/var/www/html/ owner=root group=root mode=0644
+
+#- name: "Enable proxy module"
+  apache2_module: name=proxy_http
+
+#- name: "adding proxy configuration to webservers"
+  template: src=../files/proxy.conf dest=/etc/apache2/conf-available owner=root group=root mode=0644
+
+  notify:
+  - restart-apache
+
